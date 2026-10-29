@@ -1,0 +1,99 @@
+{
+ "generated": "2026-10-29T05:53:59.934Z",
+ "node": "v22.22.0",
+ "results": [
+  {
+   "id": "S1",
+   "name": "happy path: create->dispatch->MCP worker->worker_done",
+   "pass": true,
+   "evidence": {
+    "dispatch": "disp_3",
+    "task_status": "completed",
+    "worker": "mock-free",
+    "model": "mock/free-echo",
+    "files": [
+     "sandbox/disp_3/out/result.txt"
+    ]
+   }
+  },
+  {
+   "id": "S2",
+   "name": "failed worker => task failed, no output files",
+   "pass": true,
+   "evidence": {
+    "task_status": "failed",
+    "exit": 1
+   }
+  },
+  {
+   "id": "S3",
+   "name": "retry with same dispatch_id: worker executed once; orca rejects 2nd settlement",
+   "pass": true,
+   "evidence": {
+    "starts": 1,
+    "orca_second": "{\"error\":\"already_settled:completed\"}"
+   }
+  },
+  {
+   "id": "S4",
+   "name": "worker write outside sandbox denied",
+   "pass": true,
+   "evidence": {
+    "error": "path_escape_denied: ../../../escaped.txt"
+   }
+  },
+  {
+   "id": "S5",
+   "name": "paid model unselectable at $0 (auto and explicit)",
+   "pass": true,
+   "evidence": {
+    "auto": "no_worker_within_budget: capability=premium budget=0",
+    "explicit": "budget_exceeded: mock-paid costs 0.05 > 0"
+   }
+  },
+  {
+   "id": "S6",
+   "name": "permission-bypass flag rejected",
+   "pass": true,
+   "evidence": {
+    "error": "permission_bypass_flag_rejected: --dangerously-skip-permissions"
+   }
+  },
+  {
+   "id": "S7",
+   "name": "owner gate: blocked dispatch, worker cannot resolve, gateway refuses gated work without gate id",
+   "pass": true,
+   "evidence": {
+    "early": "{\"error\":\"task_not_ready:blocked\"}",
+    "forged": "{\"error\":\"only_owner_resolves_gates\"}",
+    "no_gate": "owner_gate_required",
+    "with_gate": "completed"
+   }
+  },
+  {
+   "id": "S8",
+   "name": "secrets redacted in output and journal",
+   "pass": true,
+   "evidence": {
+    "redacted": true
+   }
+  },
+  {
+   "id": "S9",
+   "name": "forged/foreign completion rejected; task stays dispatched",
+   "pass": true,
+   "evidence": {
+    "forged": "{\"error\":\"bad_completion_attestation\"}",
+    "foreign": "{\"error\":\"sender_not_assignee\"}"
+   }
+  },
+  {
+   "id": "S10",
+   "name": "no git remote configured (push impossible); gateway has no git/network tools",
+   "pass": false,
+   "evidence": {
+    "remotes": "origin\thttps://github.com/hotrosp1/orca-mcp-worker-gateway (fetch)\norigin\thttps://github.com/hotrosp1/orca-mcp-worker-gateway (push)"
+   }
+  }
+ ]
+}
