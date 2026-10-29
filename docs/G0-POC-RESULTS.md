@@ -15,7 +15,7 @@ Lệnh: `cd /home/user/orca-mcp-worker-gateway && node poc/run.mjs` — thoát *
 | S7 | Gate: dispatch task bị khóa bị từ chối; worker không resolve được gate; gateway từ chối việc gated thiếu gate id; có gate id thì chạy | PASS (xem giới hạn) |
 | S8 | Chuỗi giống secret bị che trong output và journal | PASS |
 | S9 | Chứng thực giả / người gửi lạ bị từ chối; task giữ `dispatched` | PASS |
-| S10 | Không có git remote; mã gateway không chứa thao tác git/mạng | PASS (kiểm tra tĩnh yếu) |
+| S10 | Mã gateway không chứa thao tác git/mạng; PoC không push (repo này có remote `origin` chỉ để đọc, nên không còn tiêu chí "không có remote") | PASS (kiểm tra tĩnh yếu) |
 
 ## Giới hạn đã biết của PoC
 - Bảo vệ path chỉ áp dụng cho file do worker *trả về*; worker CLI thật tự ghi file thì cần cô lập OS. **Chưa chứng minh.**

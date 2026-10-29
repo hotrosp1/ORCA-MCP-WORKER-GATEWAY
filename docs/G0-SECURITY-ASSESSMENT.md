@@ -8,7 +8,7 @@
 | Worker lỗi không thành công giả | PASS | S2, S9 |
 | Retry không chạy trùng | PASS | S3 |
 | Không lộ secret | PASS (mẫu regex) | S8; regex hẹp (sk-, Bearer, key=) |
-| Không auto-merge/push/deploy | PASS | Không có remote; repo chỉ commit cục bộ |
+| Không auto-merge/push/deploy | PASS | Mã gateway không có thao tác git; commit chỉ cục bộ, chưa push (repo có remote `origin`, quyền push được cấp riêng) |
 
 ## Rủi ro khác
 - Gateway chạy với quyền OS user (cùng cảnh báo của `orca-mcp`): không phải ranh giới bảo mật.

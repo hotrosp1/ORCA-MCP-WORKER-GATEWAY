@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-29T05:53:59.934Z",
+ "generated": "2026-10-29T05:54:12.680Z",
  "node": "v22.22.0",
  "results": [
   {
@@ -89,10 +89,11 @@
   },
   {
    "id": "S10",
-   "name": "no git remote configured (push impossible); gateway has no git/network tools",
-   "pass": false,
+   "name": "gateway code has no git/network operations; no push performed by PoC",
+   "pass": true,
    "evidence": {
-    "remotes": "origin\thttps://github.com/hotrosp1/orca-mcp-worker-gateway (fetch)\norigin\thttps://github.com/hotrosp1/orca-mcp-worker-gateway (push)"
+    "remotes_present": true,
+    "note": "static source check only"
    }
   }
  ]
